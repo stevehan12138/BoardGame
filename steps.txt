@@ -1,2 +1,0 @@
-network part is done
-next step is to put everything in prototype2.0 in
