@@ -1,0 +1,16 @@
+{
+  "name": "boardgame",
+  "version": "1.0.0",
+  "description": "School project",
+  "main": "bot.js",
+  "author": "Steve Han",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "license": "ISC"
+}
