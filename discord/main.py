@@ -2,12 +2,15 @@ from discord.ext.commands import Bot
 import discord
 import random
 import linecache
+import sys
+sys.path.append(r'./')
+from config import tkn
 
 word = linecache.getline(r'words.txt', random.randrange(1, 9)).replace('\n', '').replace('\r', '')
 player = 0
 playerdiscord = [] #[[player, dm, role, alive, vote] ...]
 lobbyfull = False
-TOKEN = 'NzAyNjgwNDg0OTU3NjUxMDE3.XqGv9w.mF4-92buTe6zmaJmkk2tUPVaZlY'
+TOKEN = tkn
 BOT_PREFIX = ("?", "!")
 client = Bot(command_prefix=BOT_PREFIX)
 votecount = 0
