@@ -6,7 +6,7 @@ def initGame(playerdata, player, spy):
     playerid = []
     for each in range(player):
         playerid.append('innocent')
-        x = random.sample(range(player), spy)
+    x = random.sample(range(player), spy)
     for each in x:
         playerid[each] = 'spy'
 
