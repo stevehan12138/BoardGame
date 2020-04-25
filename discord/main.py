@@ -62,10 +62,60 @@ async def vote(ctx, member: discord.Member):
     global votecount
     global playerdiscord
     global player
-    await ctx.send('Vote recorded(' + str(votecount) + '/5')
-    for each in range(player):
-        if playerdiscord[each][0] == member:
-            playerdiscord[each][4]+=1
+    if votecount >= 6:
+        highest = 0
+        victim = 0
+        for each in range(player):
+            if playerdiscord[each][4] > highest:
+                highest = playerdiscord[each][4]
+                victim = each
+        playerdiscord[victim][3] = False
+        if playerdiscord[victim][2] == 'innocent':
+            await ctx.send('Vote is done, ' + playerdiscord[victim][0].mention + ' is dead and his/her role is innocent. So sad.')
+        else:
+            await ctx.send('Vote is done, ' + playerdiscord[victim][0].mention + ' is dead and his/her role is spy, yee.')
+        votecount = 0
+        for each in range(player):
+            playerdiscord[each][4] = 0
+        
+        winner = ''
+        isSpyAlive = False
+        isInnocentAlive = False
+        alives = []
+
+        for each in range(player):
+            if playerdiscord[each][2] == 'innocent' and playerdiscord[each][3] == True:
+                isInnocentAlive = True
+            else:
+                isSpyAlive = True
+            if playerdiscord[each][3] == True:
+                alives.append(1)
+
+        if isInnocentAlive is False and isSpyAlive is True:
+            winner = 'spy'
+            await ctx.send('Gameover! The winners are the spies.')
+        elif isInnocentAlive is True and isSpyAlive is False:
+            winner = 'innocent'
+            await ctx.send('Gameover! The winners are the innocents.')
+        elif len(alives) <= 2 and isSpyAlive is True:
+            winner = 'spy'
+            await ctx.send('Gameover! The winners are the spies.')
+
+        if winner != '':
+            for each in range(player):
+                await ctx.send(playerdiscord[each][0].mention + "'s role is " + playerdiscord[each][2])
+
+    else:
+        for each in range(player):
+            if playerdiscord[each][3] == True and playerdiscord[each][0] == ctx.message.author:
+                await ctx.send('Vote recorded(' + str(votecount) + '/5)')
+                for each in range(player):
+                    if playerdiscord[each][0] == member:
+                        playerdiscord[each][4]+=1
+                votecount+=1
+                break
+            else:
+                print('burh')
 
 client.run(TOKEN)
 
