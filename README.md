@@ -1,6 +1,6 @@
 # BoardGame
 
-My board game project written in Python. discord is a bot in discord who acts like a narranator for my game. SteveBoardGameAlpha_v1.0 is completly python based version using socket stuff with no discord and other stuff. Prototypes are incomplete and only shows the concept of my game.
+My board game project written in Python. discord is a bot in discord who acts like a narrator for my game. SteveBoardGameAlpha_v1.0 is completly python based version using socket stuff with no discord and other stuff. Prototypes are incomplete and only shows the concept of my game.
 
 # Rules
 Who's the spy
