@@ -56,7 +56,7 @@ class PlayerData:
     def getAlivePlayers(self):
         alivePlayers = []
         for id in range(self.playerCount):
-            if self.playerList[str(id)]['isAlive'] is True:
+            if self.playerList[id]['isAlive'] is True:
                 alivePlayers.append(id)
         return alivePlayers
 

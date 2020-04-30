@@ -42,8 +42,8 @@ async def startgame(ctx):
         x = random.sample(range(players), spies)
         for each in x:
             p.playerList[each]['Role'] = 'spy'
-        for each in range(player):
-            if p.playerList[each][2] == 'spy':
+        for each in range(players):
+            if p.playerList[each]['Role'] == 'spy':
                 await p.playerList[each]['DM'].send('You are a spy.')
             else:
                 await p.playerList[each]['DM'].send('You are a innocent with the word ' + p.playerWord + '.')
@@ -77,6 +77,7 @@ async def vote(ctx, player: discord.Member):
             winner = p.gameStats()
             if winner is not False:
                 await ctx.send('Game over! ' + winner + 'are the winners!')
+                await ctx.send('The word is ' + p.playerWord + 'for innocents.')
 
     else:
         await ctx.send("You can't vote because you voted a dead person or you are dead, or you voted too many times.")
