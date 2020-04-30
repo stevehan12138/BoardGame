@@ -29,7 +29,7 @@ async def startgame(ctx):
         global playerdiscord
         global player
         global word
-        x = random.sample(range(player), 2)
+        x = random.sample(range(player), 1)
         for each in x:
             playerdiscord[each][2] = 'spy'
         for each in range(player):
@@ -46,12 +46,12 @@ async def startgame(ctx):
                 pass_context=True)
 async def ready(ctx):
     global player
-    await ctx.send('You are ready, '  + ctx.message.author.mention + ' (' + str(player) + '/5)')
+    await ctx.send('You are ready, '  + ctx.message.author.mention + ' (' + str(player) + '/3)')
     dm = await ctx.message.author.create_dm()
     global playerdiscord
     playerdiscord.append([ctx.message.author, dm, 'Innocent', True, 0])
     player+=1
-    if player >=6:
+    if player >=4:
         global lobbyfull
         lobbyfull = True
         await ctx.send('Everyone is ready, type !startgame to start the game.')
@@ -65,7 +65,7 @@ async def vote(ctx, member: discord.Member):
     global player
     for each in range(player):
         if playerdiscord[each][3] == True and playerdiscord[each][0] == ctx.message.author:
-            await ctx.send('Vote recorded(' + str(votecount) + '/5)')
+            await ctx.send('Vote recorded(' + str(votecount) + '/3)')
             for each in range(player):
                 if playerdiscord[each][0] == member:
                     playerdiscord[each][4]+=1
@@ -73,7 +73,7 @@ async def vote(ctx, member: discord.Member):
             break
         else:
             print('burh')
-    if votecount >= 6:
+    if votecount >= 4:
         highest = 0
         victim = 0
         for each in range(player):
