@@ -10,6 +10,7 @@ p = PlayerData()
 players = 4
 spies = 1
 lobbyfull = False
+channel = None
 
 @client.event
 async def on_ready():
@@ -22,8 +23,10 @@ async def ready(ctx):
     global p
     global players
     global lobbyfull
+    global channel
     if await p.addPlayer('innocent',ctx.message.author) is True:
         await ctx.send('You are ready, '  + ctx.message.author.mention + ' (' + str(p.playerCount) + '/4)')
+        channel = ctx
     else:
         await ctx.send("You ready too much you know stop it get some help")
     if p.playerCount == players:
@@ -38,6 +41,7 @@ async def startgame(ctx):
     global spies
     if lobbyfull is True:
         await ctx.send('Game started. Check your DM to see your role. Then you guys can talk, try ask each other what their word is. After that, type !vote @SOMEONE to vote someone')
+        await ctx.send('Spies can type !guess WORD in there DM to the bot and guess the word if they think that they got the right word.')
         global p
         x = random.sample(range(players), spies)
         for each in x:
@@ -81,5 +85,20 @@ async def vote(ctx, player: discord.Member):
 
     else:
         await ctx.send("You can't vote because you voted a dead person or you are dead, or you voted too many times.")
+
+@client.command(name='guess',
+                description="vote",
+                pass_context=True)
+async def guess(ctx, word):
+    global p
+    global channel
+    if isinstance(ctx.channel, discord.DMChannel):
+        if word.lower() == p.playerWord:
+            await channel.send('Gameover! ' + ctx.message.author.mention + ' is the spy and he got the word.')
+        else:
+            p.playerList[p.findPlayer(ctx.message.author)]['isAlive'] = False
+            await channel.send(ctx.message.author.mention + ' is a spy and he was trying to guess the word, but it was wrong. Now he is dead, yee.')
+    else:
+        await ctx.send("You can't do that in a public channel, or you aren't a spy")
 
 client.run(tkn)
