@@ -5,10 +5,12 @@ import linecache
 import sys
 sys.path.append(r'./')
 from config import tkn
+import * from tkinter
 
 word = linecache.getline(r'words.txt', random.randrange(1, 9)).replace('\n', '').replace('\r', '')
 player = 0
-playerdiscord = [] #[[player, dm, role, alive, vote] ...]
+playerdiscord = [] #[[player, dm, role, alive, vote] ...] 
+#wirdos
 lobbyfull = False
 TOKEN = tkn
 BOT_PREFIX = ("?", "!")
