@@ -1,49 +1,33 @@
 from tkinter import *
 import tkinter.font as tkFont
 
-game = Tk()
+class Game():
 
-game.title("Steve's Board Game")
-fontStyle = tkFont.Font(family="Times New Roman", size=28)
-fontStyle1 = tkFont.Font(size=90)
-fontStyle2 = tkFont.Font(family="Times New Roman", size=14)
-game.geometry("1920x1080")
-game.configure(bg = "white")
+    def __init__(self):
+        self.game = Tk()
+        self.game.title("Steve's Board Game")
+        self.fontStyle = tkFont.Font(family="Times New Roman", size=28)
+        self.fontStyle1 = tkFont.Font(size=90)
+        self.fontStyle2 = tkFont.Font(family="Times New Roman", size=14)
+        self.game.geometry("400x400")
+        self.game.configure(bg = "white")
+        self.user_name = 'p1'
+        self.widgets()
 
-# actually I think comments are kinda useful u kno
+""" def send_message(self):
+        self.canvas_chat.create_text(10, 40, text = self.user_name + ': ' + self.chat_input.get(), font = self.fontStyle2, anchor = NW)
+        self.chat_input.delete(0, END) """
 
-# Declaring a widget
+    def widgets(self):
+    #    self.canvas_chat = Canvas(self.game, width = 300, height = 500, bg = 'gray92')
+        self.canvas_chat.pack()
+    #    self.input_user = StringVar()
+    #    self.chat_input = Entry(self.game, text = self.input_user, borderwidth = 2, font = self.fontStyle2, bg = 'gray92', width = 27)
+        self.chat_input.pack()
+    #    self.enter_chat = Button(self.game, width = 8, text = '    Enter', command = self.send_message)
+        self.enter_chat.pack()
 
-canvas = Canvas(game, width = 800, height = 100)
-input_user = StringVar()
-input_field = Entry(game, text =input_user, borderwidth = 2, font = fontStyle2, bg = 'light gray', width = 80)
-input_field.bind("<Return>", Enter_pressed)
-name_Label = Label(game, text = "                                                                                Who's the spy?", font = fontStyle, borderwidth = 2, bg = 'white') #(put name of the game)
-filling_label_1 = Label(game, text = " ", font = fontStyle1, bg = 'white')
-filling_label_2 = Label(game, text = " ", font = fontStyle1, bg = 'white')
-filling_label_3 = Label(game, text = " ", font = fontStyle1, bg = 'white')
+    def start(self):
+        self.game.mainloop()
 
-# Putting the widget up on the screen
-
-name_Label.grid(row = 0, column = 0)
-filling_label_1.grid(row = 1, column = 0)
-filling_label_2.grid(row = 2, column = 0)
-filling_label_3.grid(row = 3, column = 0)
-canvas.grid(row = 4, column = 1)
-input_field.grid(row = 5, column = 1)
-
-
-
-
-
-# Draw Loop
-game.mainloop()
-
-
-
-
-
-
-
-
-
+Game().start()
